@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package com.example.grpcdemo;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option java_package = "com.example.grpcdemo";
+option java_multiple_files = true;
+
+service MyService {
+  rpc getStudent(GetStudentReq) returns (Student);
+  rpc getStudentDetails(google.protobuf.Empty) returns (StudentsList);
+  rpc saveStudentDetails(Student) returns (SuccessResponse);
+  rpc updateStudentDetails(Student) returns (SuccessResponse);
+  rpc deleteStudentDetails(deleteStudent) returns (SuccessResponse);
+}
+
+message MyRequest {
+  string name = 1;
+}
+
+message SuccessResponse {
+  string message = 1;
+}
+
+message GetStudentReq {
+  int64 id = 1;
+}
+
+message deleteStudent {
+  int64 id = 1;
+}
+
+message StudentsList {
+  repeated Student studentList = 1;
+}
+
+message Student {
+  int64 id = 1;
+  string name = 2;
+  string address = 3;
+  int64 age = 4;
+  int64 year = 5;
+}
+
